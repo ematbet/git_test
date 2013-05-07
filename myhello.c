@@ -23,15 +23,20 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 
+/* myhello module parameters */
+static char *mystring = "pippo";
+module_param(mystring, charp, 0644);
+MODULE_PARM_DESC(mystring, "myhello messages (default pippo)");
+
 static int hello_init(void)
 {
-    printk(KERN_ALERT "hello world!\n");
+    printk(KERN_ALERT "hello world: %s\n", mystring);
     return 0;
 }
 
 static void hello_exit(void)
 {
-    printk(KERN_ALERT "goodbye cruel world!\n");
+    printk(KERN_ALERT "goodbye cruel world\n");
     return;
 }
 
